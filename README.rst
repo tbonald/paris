@@ -7,7 +7,7 @@ https://
 Dependency
 ----------
 
-This Python module depends on the following ``networkx`` package,
+This Python module depends on the ``networkx`` package,
 which can be installed using ``pip``.
 
 ::
@@ -62,10 +62,3 @@ License
 
 Released under the BSD license.
 
-Authors
--------
-
-   Thomas Bonald <thomas.bonald@telecom-paristech.fr>
-   Bertrand Charpentier <bertrand.charpentier@telecom-paristech.fr>
-   Alexandre Hollocou <alexandre.hollocou@inria.fr>
-   Alexis Galland <alexis.galland@inria.fr>
