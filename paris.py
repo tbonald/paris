@@ -10,7 +10,7 @@ def paris(G):
     F = nx.convert_node_labels_to_integers(F)
 
     # node weights
-    w = {u: 0 for u in nodes}
+    w = {u: 0 for u in range(n)}
     wtot = 0
     for (u,v) in F.edges():
         weight = F[u][v]['weight']
@@ -21,7 +21,7 @@ def paris(G):
             wtot += weight
 
     # cluster sizes
-    s = {u: 1 for u in nodes}
+    s = {u: 1 for u in range(n)}
     
     # connected components
     cc = []
