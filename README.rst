@@ -1,5 +1,5 @@
 Paris
-===
+=====
 
 Paris is a hierarchical graph clustering algorithm described in:
 https://
@@ -50,8 +50,11 @@ Running the tests
 --------------
 
 Tests on both synthetic and real data are available as Jupyter notebooks:
-- synthetic_data.ipynb
-- real_data.ipynb
+
+.. code:: python
+
+    synthetic_data.ipynb
+    real_data.ipynb
 
   
 License
@@ -59,7 +62,7 @@ License
 
 Released under the BSD license.
 
- Authors
+Authors
 -------
 
    Thomas Bonald <thomas.bonald@telecom-paristech.fr>
