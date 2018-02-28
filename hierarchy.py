@@ -41,25 +41,31 @@ def top_cut_clustering(D, nodes, exclude = []):
         left_tree = cluster_trees.pop(i)
         right_tree = cluster_trees.pop(j)
         height = np.log(D[t,2]) - np.log(D[0,2])
-        if min(i,j) < n:
+        if min(i,j) < n and height < float('inf'):
             new_tree = cluster_tree(n + t, height, 0, True)            
         else:
-            left_gap = height - left_tree.height
-            if left_gap < left_tree.gap:
-                left_gap = left_tree.gap
-            else:
-                if left_tree.node in exclude:
-                    left_gap = float('inf')
+            if left_tree.height < float('inf'):
+                left_gap = height - left_tree.height
+                if left_gap < left_tree.gap:
+                    left_gap = left_tree.gap
                 else:
-                    left_tree.max_gap = True
-            right_gap = height - right_tree.height
-            if right_gap < right_tree.gap:
-                right_gap = right_tree.gap
+                    if left_tree.node in exclude:
+                        left_gap = float('inf')
+                    else:
+                        left_tree.max_gap = True
             else:
-                if right_tree.node in exclude:
-                    right_gap = float('inf') 
+                left_gap = float('inf')
+            if right_tree.height < float('inf'):
+                right_gap = height - right_tree.height
+                if right_gap < right_tree.gap:
+                    right_gap = right_tree.gap
                 else:
-                    right_tree.max_gap = True
+                    if right_tree.node in exclude:
+                        right_gap = float('inf') 
+                    else:
+                        right_tree.max_gap = True
+            else:
+                right_gap = float('inf')
             new_tree = cluster_tree(n + t, height, min(left_gap, right_gap), False)
         new_tree.left = left_tree
         new_tree.right = right_tree
