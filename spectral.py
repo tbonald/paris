@@ -16,12 +16,5 @@ def spectral(G, k = 20):
     lam,V = sp.linalg.eigsh(L, k_, sigma = -1)
     index = np.argsort(lam)
     lam,V = lam[index], V[:,index]
-
-    # Connected components
-    CC = list(nx.connected_components(G))
-    K = min(len(CC),k_)
-    V[:,0:K] = np.zeros((n,K))
-    for l in range(K):
-        V[list(CC[l]),l] = 100. * np.ones(len(CC[l]))
         
     return sch.linkage(V, method =  'ward')
