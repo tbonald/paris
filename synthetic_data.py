@@ -34,13 +34,6 @@ class sbm:
     def clusters(self):
         return self._clusters
 
-    def clusters_index(self):
-        clusters_index = np.zeros(sum(self._partition))
-        for i, g in enumerate(self._clusters):
-            for u in g:
-                clusters_index[u] = i
-        return clusters_index
-
 def hierachical_index(i,numbers):
     i_ = []
     for n in numbers:
@@ -87,23 +80,20 @@ def score(pred_clustering, true_clustering):
     recall = 0.
     f1 = 0.
     total = 0.
-    for c in pred_clustering:
-        precision_ = 0.
-        recall_ = 0.
-        f1_ = 0.
-        for true_c in true_clustering:
-            intersection = len(list(set(c) & set(true_c)))
-            if intersection > 0:
-                precision_ = max(precision_, 1. * intersection / len(c))
-                recall_ = max(recall_, 1. * intersection / len(true_c))
-                if precision_ >0 and recall_ > 0:
-                    f1_ = max(f1_, 2. / (1. / precision_ + 1. / recall_))
-        precision += len(c) * precision_
-        recall += len(c) * recall_
-        f1 += len(c) * f1_
-        total += len(c)
+    for true_c in true_clustering:
+        best_intersection = 0
+        for pred_c in pred_clustering:
+            intersection = len(list(set(pred_c) & set(true_c)))
+            if intersection > best_intersection:
+                best_intersection = intersection
+                best_c = pred_c
+        precision += 1. * len(true_c) * best_intersection / len(best_c)
+        recall += 1. * len(true_c) * best_intersection / len(true_c)
+        f1 += 1. * len(true_c) * best_intersection * 2 / (len(best_c) +  len(true_c))
+        total += len(true_c)
     if total > 0:
         precision = precision / total
         recall = recall / total
         f1 = f1 / total
     return precision, recall, f1
+

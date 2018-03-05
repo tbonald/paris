@@ -135,3 +135,45 @@ def plot_dendrogram(D, logscale="True", filename = ""):
         plt.savefig(filename + ".pdf", bbox_inches = 'tight')
     else:
         plt.show()
+
+def set_color(bp, color):
+    for i in bp.keys():
+        for j in range(len(bp[i])):
+            plt.setp(bp[i][j], color = color)
+
+def plot_running_times(results, filename = ""):
+    fig = plt.figure()
+    
+    colors = ['b', 'r', 'g']
+    datalabels = ['Openstreet', 'Openflights', 'Wikipedia-school']
+    
+    width = 0.2
+    delta = 0.25
+    xposition = [1, 2, 3]
+    xpositions = []
+    xpositions.append(list(np.array(xposition) - delta))
+    xpositions.append(xposition)
+    xpositions.append(list(np.array(xposition) + delta))
+    
+    for i in range(len(results)):
+        bp = plt.boxplot(results[i], showfliers = False, positions = xpositions[i], widths = width)
+        set_color(bp, colors[i])
+
+    ax = plt.axes()
+    ax.set_xticklabels(datalabels)
+    ax.set_xticks(xposition)
+    plt.xlim(min(xpositions[0]) - width, max(xpositions[2]) + width)
+    hA, = plt.plot([1,1],'b-')
+    hB, = plt.plot([1,1],'r-')
+    hC, = plt.plot([1,1],'g-')
+
+    plt.legend((hA, hB, hC),('Paris', 'Louvain', 'Spectral'))
+    hA.set_visible(False)
+    hB.set_visible(False)
+    hC.set_visible(False)
+
+    plt.ylabel('Running time (s)')
+    if filename != "":
+        plt.savefig(filename + ".pdf", bbox_inches = 'tight')
+    else:
+        plt.show()

@@ -11,14 +11,16 @@ from synthetic_data import sbm, score
 algos = ["paris", "louvain", "spectral"]
 
 def clustering(G, algo):
+    nodes = list(G.nodes())
     if algo == "paris":
         D = paris(G)
-        return top_clustering(D, list(G.nodes()))
+        C = top_clustering(D, nodes)
     elif algo == "louvain":
-        return louvain(G)
+        C = louvain(G)
     elif algo == "spectral":
         D = spectral(G)
-        return top_clustering(D, list(G.nodes()))
+        C = top_clustering(D, nodes)
+    return C
 
 def get_results(nb_samples, nb_blocks = 40, block_size = [10], d_int = 5, d_ext = 1):
     sbm_model = sbm(nb_blocks * block_size, d_int, d_ext)  
@@ -27,12 +29,11 @@ def get_results(nb_samples, nb_blocks = 40, block_size = [10], d_int = 5, d_ext 
     for s in range(nb_samples):
         G = sbm_model.create_graph()
         true_clustering = sbm_model.clusters()
-        while not nx.is_connected(G):
-            cc = list(nx.connected_components(G))
-            for l in range(len(cc) - 1):
-                u = np.random.choice(list(cc[l]))
-                v = np.random.choice(list(cc[l + 1]))
-                G.add_edge(u, v, weight = 1)
+        CC = list(nx.connected_components(G))
+        for l in range(len(CC) - 1):
+            i = np.random.choice(list(CC[l]))
+            j = np.random.choice(list(CC[l + 1]))
+            G.add_edge(i, j, weight = 1)
         for i, algo in enumerate(algos):
             pred_clustering = clustering(G, algo)       
             score_samples[i].append(score(pred_clustering, true_clustering))

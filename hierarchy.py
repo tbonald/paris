@@ -23,7 +23,7 @@ def top_clustering(D, nodes):
     clustering, cut = top_cut_clustering(D, nodes)
     return clustering
 
-def top_clusterings(D, nodes, k = 1):
+def top_clusterings(D, nodes, k = 2):
     clusterings = []
     cut = []
     for l in range(k):
