@@ -11,10 +11,10 @@ def spectral(G, k = 20):
     D = sp.diags(deg)
     L = D - A
     
-    # Spectral decomposition
+    # Spectral embedding
     k_ = min(k,n - 1)
-    lam,V = sp.linalg.eigsh(L, k_, sigma = -1)
+    lam, V = sp.linalg.eigsh(L, k_, sigma = -1)
     index = np.argsort(lam)
-    lam,V = lam[index], V[:,index]
+    lam, V = lam[index], V[:,index]
         
     return sch.linkage(V, method =  'ward')
