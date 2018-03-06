@@ -1,6 +1,8 @@
 import numpy as np
 import networkx as nx
 
+# Stochastic block model 
+
 class sbm:
     def __init__(self, partition, av_degree_in, av_degree_out):
         self._partition = partition
@@ -40,7 +42,9 @@ def hierachical_index(i,numbers):
         i_.append(i % n)
         i = i // n
     return np.array(i_)
-    
+
+# Hierarchical stochastic block model 
+
 class hsbm:
     def __init__(self, numbers, parameters):
         self._parameters = parameters
