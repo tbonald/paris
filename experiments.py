@@ -1,5 +1,7 @@
 import numpy as np
 import networkx as nx
+
+# for data export only
 import csv
 
 from hierarchy import top_clustering
