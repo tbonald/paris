@@ -1,5 +1,7 @@
 import numpy as np
 
+# Clustering extraction from a dendrogram
+
 class cluster_tree:
     def __init__(self, node, height, gap, max_gap):
         self.left = None
