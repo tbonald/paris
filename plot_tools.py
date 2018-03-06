@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from scipy.cluster.hierarchy import dendrogram
 
 plt.rcParams.update({'font.size': 14})
-    
+
 def plot_results(range_, nb_blocks_, results, xlabel, filename = ""):
     algos = ["Paris","Louvain","Spectral"]
     colors = ['b','r','g']
