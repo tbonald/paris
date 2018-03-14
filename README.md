@@ -48,7 +48,7 @@ plot_dendrogram(D)
 
 ![Alt text](images/dendrogram.png)
 
-Extraction of the top clustering from the dendrogram
+Extraction of the top clustering(s) from the dendrogram
 
 
 ```python
@@ -63,9 +63,6 @@ print(C)
 [12, 10, 19, 15, 17, 14, 16, 11, 13, 18],
 [6, 0, 9, 8, 3, 7, 4, 5, 1, 2],
 [24, 23, 21, 29, 22, 27, 25, 28, 20, 26]]
-
-Extraction of the top-3 clustering from the dendrogram
-
 
 ```python
 C_list = top_clusterings(D, nodes, 3)
