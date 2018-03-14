@@ -81,5 +81,5 @@ real_data.ipynb
 ## License
 
 
-Released under the BSD license.
+Released under the GNU General Public License v3.
 
