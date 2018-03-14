@@ -4,5 +4,5 @@
 	print(dd)
 ```
 
-![mon image][images/dendrogram.pdf]
+![Alt text](images/dendrogram.pdf)
 
