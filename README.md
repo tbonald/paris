@@ -21,7 +21,7 @@ from paris.experiments.synthetic_data import sbm
 from paris.algorithms.paris import paris
 ```
 
-Stochastic block model with 4 blocks of 10 nodes with internal / external average degrees = 6 / 1
+Stochastic block model with 4 blocks of 10 nodes and internal / external average degrees = 6 / 1
 
 ```python
 model = sbm(4 * [10], 6, 1)
