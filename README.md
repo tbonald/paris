@@ -68,7 +68,7 @@ Extraction of the top-3 clustering from the dendrogram
 
 
 ```python
-C_list = top_clusterings(D, nodes,3)
+C_list = top_clusterings(D, nodes, 3)
 print(C_list)
 ```
 
@@ -90,8 +90,8 @@ print(C_list)
 Tests on both synthetic and real data are available as Jupyter notebooks:
 
 ```python
-    synthetic_data.ipynb
-    real_data.ipynb
+synthetic_data.ipynb
+real_data.ipynb
 ```
   
 ## License
