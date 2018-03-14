@@ -19,32 +19,16 @@ Getting Started
 
 Hierarchical clustering of a simple graph:
 
+Dendrogram of a simple graph (stochastic block model):
+
 .. code:: python
 
-	import networkx as nx
-	from paris.experiments.synthetic_data import sbm
+    from synthetic_data import sbm
+    from paris import paris
 
-    # Stochastic block model with 4 blocks of 10 nodes
-    # internal / external average degree (inside / outside blocks) = 5 / 1
     model = sbm(4 * [10], 5, 1)
-    
-    # Generation of a random instance
-    G = model.generate_graph()
-    print(nx.info(G))
-    
-    # Hierarchical clustering (as a dendrogram)
+    G = model.create_graph()
     D = paris(G)
-    
-Visualization:
-
-.. code:: python
-
-    from paris.experiments.plot_tools import plot_dendrogram
-
-    plot_dendrogram(D)
-    
-![Alt text](images/dendrogram.jpg?raw = true "A dendrogram")
-
 
 Extraction of the top clustering from the dendrogram:
 
