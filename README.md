@@ -21,10 +21,10 @@ from paris.experiments.synthetic_data import sbm
 from paris.algorithms.paris import paris
 ```
 
-Stochastic block model with 4 blocks of 10 nodes with internal / external average degrees = 5 / 1
+Stochastic block model with 4 blocks of 10 nodes with internal / external average degrees = 6 / 1
 
 ```python
-model = sbm(4 * [10], 5, 1)
+model = sbm(4 * [10], 6, 1)
 ```
 
 Random instance of the model (as a `networkx` graph)
@@ -56,31 +56,18 @@ from paris.algorithms.hierarchy import top_clustering, top_clusterings
 
 nodes = list(G.nodes())
 C = top_clustering(D, nodes)
-print(C)
+print([len(c) for c in C])
 ```
-
-[[35, 33, 34, 31, 30, 32, 36, 37, 38, 39],
-[12, 10, 19, 15, 17, 14, 16, 11, 13, 18],
-[6, 0, 9, 8, 3, 7, 4, 5, 1, 2],
-[24, 23, 21, 29, 22, 27, 25, 28, 20, 26]]
+[10, 10, 9, 11]
 
 ```python
 C_list = top_clusterings(D, nodes, 3)
-print(C_list)
+for C in C_list:
+    print([len(c) for c in C])
 ```
-
-[[[35, 33, 34, 31, 30, 32, 36, 37, 38, 39],
-[12, 10, 19, 15, 17, 14, 16, 11, 13, 18],
-[6, 0, 9, 8, 3, 7, 4, 5, 1, 2],
-[24, 23, 21, 29, 22, 27, 25, 28, 20, 26]], [[9, 8, 3],
-[36, 37, 38, 39], [12, 10, 19], [6, 0], [11, 13, 18],
-[35, 33, 34, 31, 30, 32], [7, 4, 5, 1, 2], [15, 17, 14, 16],
-[27, 25, 28, 20, 26], [24, 23, 21, 29, 22]], [[36, 37], [38, 39],
-[9, 8, 3], [35, 33, 34], [12, 10, 19], [6, 0], [11, 13, 18],
-[31, 30, 32], [28, 20, 26], [27, 25], [7, 4, 5, 1, 2],
-[15, 17, 14, 16], [24, 23, 21, 29, 22]]]
-
-
+[10, 10, 9, 11]
+[4, 2, 4, 2, 5, 4, 4, 4, 5, 6]
+[2, 4, 2, 4, 2, 5, 4, 4, 2, 4, 3, 4]
 
 ## Running the tests
 
