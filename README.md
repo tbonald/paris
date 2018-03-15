@@ -3,6 +3,7 @@
 Paris is a hierarchical graph clustering algorithm described in the paper:
 
 [A Sliding-Resolution Algorithm for Hierarchical Graph Clustering](https://perso.telecom-paristech.fr/bonald/papers/paris.pdf)
+
 by Thomas Bonald, Bertrand Charpentier, Alexis Galland and Alexandre Hollocou
 
 ## Dependency
