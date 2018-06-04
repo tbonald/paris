@@ -20,65 +20,27 @@ sudo pip install networkx
 Hierarchical clustering of a simple graph
 
 ```python
-from paris.experiments.synthetic_data import sbm
-from paris.algorithms.paris import paris
+from paris import paris
 ```
 
-Stochastic block model with 4 blocks of 10 nodes and internal / external average degrees = 6 / 1
+Toy graph 
 
 ```python
-model = sbm(4 * [10], 6, 1)
+G = nx.Graph()
 ```
 
-Random instance of the model (as a `networkx` graph)
-
-```python
-G = model.generate_graph()
-```
 Hierarchical clustering (as a dendrogram)
 
 ```python
 D = paris(G)
 ```
 
-Visualization
-
-```python
-from paris.experiments.plot_tools import plot_dendrogram
-
-plot_dendrogram(D)
-```
-
-![Alt text](images/dendrogram.png)
-
-Extraction of the top clustering(s) from the dendrogram
-
-
-```python
-from paris.algorithms.hierarchy import top_clustering, top_clusterings
-
-nodes = list(G.nodes())
-C = top_clustering(D, nodes)
-print([len(c) for c in C])
-```
-[10, 10, 9, 11]
-
-```python
-C_list = top_clusterings(D, nodes, 3)
-for C in C_list:
-    print([len(c) for c in C])
-```
-[10, 10, 9, 11]
-[4, 2, 4, 2, 5, 4, 4, 4, 5, 6]
-[2, 4, 2, 4, 2, 5, 4, 4, 2, 4, 3, 4]
-
 ## Running the tests
 
-Tests on both synthetic and real data are available as Jupyter notebooks:
+Tests on real data are available as a Jupyter notebook:
 
 ```python
-synthetic_data.ipynb
-real_data.ipynb
+example.ipynb
 ```
   
 ## License
