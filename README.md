@@ -26,7 +26,7 @@ from paris import paris
 Toy graph 
 
 ```python
-G = nx.Graph()
+G = nx.erdos_renyi_graph()
 ```
 
 Hierarchical clustering (as a dendrogram)
@@ -40,11 +40,14 @@ D = paris(G)
 Tests on real data are available as a Jupyter notebook:
 
 ```python
-example.ipynb
+real_data.ipynb
 ```
   
 ## License
 
 
-Released under the GNU General Public License v3.
+Released under the BSD License.
 
+```
+Copyright (C) 2018, Thomas Bonald and Bertrand Charpentier
+```
