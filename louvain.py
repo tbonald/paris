@@ -1,11 +1,13 @@
 import networkx as nx
 
-def maximize(G,gamma,eps):
+def maximize(G,resolution,eps):
+    
     # node weights
     node_weight = {u: 0. for u in G.nodes()}
     for (u,v) in G.edges():
         node_weight[u] += G[u][v]['weight']
         node_weight[v] += G[u][v]['weight']
+        
     # total weight
     wtot = sum(list(node_weight.values()))
     # clusters
@@ -21,14 +23,14 @@ def maximize(G,gamma,eps):
             # Compute delta for every neighbor
             delta = {}
             for k in w[u].keys():
-                delta[k] = w[u][k] - gamma * node_weight[u] * cluster_weight[k] / wtot
+                delta[k] = w[u][k] - resolution * node_weight[u] * cluster_weight[k] / wtot
             # Compute delta for u itself (if not already done)
             k = cluster[u]
             if k not in w[u].keys():
-                delta[k] = - gamma * node_weight[u] * cluster_weight[k] / wtot
+                delta[k] = - resolution * node_weight[u] * cluster_weight[k] / wtot
             # Compare the greatest delta to epsilon
             l = max(delta,key=delta.get)
-            if delta[l] - delta[k] > gamma * (node_weight[u] * node_weight[u] / wtot) + eps / wtot:
+            if delta[l] - delta[k] > resolution * (node_weight[u] * node_weight[u] / wtot) + eps / wtot:
                 increase = True
                 cluster[u] = l
                 # Update information about neighbors and the community change of u
@@ -67,15 +69,18 @@ def get_clustering(cluster_dict):
             cluster_list[cluster_index.index(k)].append(u)
     return cluster_list
 
-def louvain(G,resolution = 1,eps = 0.001):
-    gamma = resolution
-    cluster = maximize(G,gamma,eps)
+def louvain(G,resolution = 1,eps = 0.001, unit_weights = True):
+    F = G.copy()
+    if unit_weights:
+        for (u,v) in F.edges():
+            F[u][v]['weight'] = 1
+    cluster = maximize(F,resolution,eps)
     n = len(cluster)
     k = len(set(cluster.values()))
     while k < n:
-        H = aggregate(G,cluster)
-        new_cluster = maximize(H,gamma,eps)
-        cluster = {u: new_cluster[cluster[u]] for u in G.nodes()}
+        H = aggregate(F,cluster)
+        new_cluster = maximize(F,resolution,eps)
+        cluster = {u: new_cluster[cluster[u]] for u in F.nodes()}
         n = k
         k = len(set(cluster.values()))
     return get_clustering(cluster)
