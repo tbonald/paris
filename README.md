@@ -24,13 +24,13 @@ import networkx as nx
 from paris import paris
 ```
 
-Generate a random network:
+Generate a simple network:
 
 ```python
 G = nx.erdos_renyi_graph(n = 50, p = 0.2)
 ```
 
-Compute hierarchical clustering (as a dendrogram):
+Compute the hierarchical clustering (as a dendrogram):
 
 ```python
 D = paris(G)
@@ -44,7 +44,7 @@ from utils import plot_dendrogram
 plot_dendrogram(D)
 ```
 
-![Alt text](images/dendrogram.png)
+![Alt text](images/example_dendrogram.png)
 
 ## Running the tests
 
