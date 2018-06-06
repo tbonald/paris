@@ -57,5 +57,5 @@ hierarchical_clustering.ipynb
 ## License
 
 
-Released under the GNU General Public License v3.
+Released under the 3-clause BSD license.
 
