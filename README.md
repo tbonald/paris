@@ -2,7 +2,7 @@
 
 Paris is a hierarchical graph clustering algorithm described in the paper:
 
-[A Sliding-Resolution Algorithm for Hierarchical Graph Clustering](http://arxiv.org/abs/1806.01664)
+[Hierarchical Graph Clustering using Node Pair Sampling](http://arxiv.org/abs/1806.01664)
 
 by Thomas Bonald, Bertrand Charpentier, Alexis Galland and Alexandre Hollocou
 
