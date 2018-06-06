@@ -1,3 +1,11 @@
+# -*- coding: utf-8 -*-
+#
+#    Copyright (C) 2018 by
+#    Thomas Bonald <thomas.bonald@telecom-paristech.fr>
+#    Bertrand Charpentier <bertrand.charpentier@live.fr>
+#    All rights reserved.
+#    BSD license.
+
 import networkx as nx
 
 def maximize(G,resolution,eps):
