@@ -30,11 +30,11 @@ def maximize(G,resolution,eps):
         for u in G.nodes():
             # Compute delta for every neighbor
             delta = {}
-            for k in w[u].keys():
+            for k in w[u]:
                 delta[k] = w[u][k] - resolution * node_weight[u] * cluster_weight[k] / wtot
             # Compute delta for u itself (if not already done)
             k = cluster[u]
-            if k not in w[u].keys():
+            if k not in w[u]:
                 delta[k] = - resolution * node_weight[u] * cluster_weight[k] / wtot
             # Compare the greatest delta to epsilon
             l = max(delta,key=delta.get)
@@ -77,8 +77,11 @@ def get_clustering(cluster_dict):
             cluster_list[cluster_index.index(k)].append(u)
     return cluster_list
 
-def louvain(G,resolution = 1,eps = 0.001, unit_weights = True):
-    F = G.copy()
+def louvain(G, resolution = 1, eps = 0.001, unit_weights = True, copy_graph = False):
+    if copy_graph:
+        F = G.copy()
+    else:
+        F = G
     if unit_weights:
         for (u,v) in F.edges():
             F[u][v]['weight'] = 1
