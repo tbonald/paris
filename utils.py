@@ -135,11 +135,11 @@ def normalized_dasgupta_cost(G,D):
     for t in range(n - 1):
         u = int(D[t][0])
         v = int(D[t][1])
-        #try:
-        p = 1. * H[u][v]['weight'] / wtot
-        J += p * (q[u] + q[v])
-        #except:
-        #    pass
+        try:
+            p = 1. * H[u][v]['weight'] / wtot
+            J += p * (q[u] + q[v])
+        except:
+            pass
         H.add_node(n + t)
         neighbors_u = list(H.neighbors(u))
         neighbors_v = list(H.neighbors(v))
