@@ -9,10 +9,13 @@
 import numpy as np
 import networkx as nx
 
-def paris(G, unit_weights = True):
-    F = G.copy()
-    n = F.number_of_nodes()
-    
+def paris(G, copy_graph = True):
+    n = G.number_of_nodes()
+    if copy_graph:
+        F = G.copy()
+    else:
+        F = G
+        
     # index nodes from 0 to n - 1
     if set(F.nodes()) != set(range(n)):
         F = nx.convert_node_labels_to_integers(F)
@@ -21,7 +24,7 @@ def paris(G, unit_weights = True):
     w = {u: 0 for u in range(n)}
     wtot = 0
     for (u,v) in F.edges():
-        if unit_weights:
+        if 'weight' not in F[u][v]:
             F[u][v]['weight'] = 1
         weight = F[u][v]['weight']
         w[u] += weight

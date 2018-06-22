@@ -101,6 +101,61 @@ def extract_subclusters(c_high_level, clustering_low_level):
             subclusters.append(c)
     return subclusters
 
+
+##############################     
+### Quality of a hierarchy ###
+############################## 
+
+# Normalized Dasgupta cost function
+def normalized_dasgupta_cost(G,D):
+    F = G.copy()
+    n = F.number_of_nodes()
+
+   # index nodes from 0 to n - 1
+    if set(F.nodes()) != set(range(n)):
+        F = nx.convert_node_labels_to_integers(F)
+    
+    # node weights
+    w = {u: 0 for u in F.nodes()}
+    wtot = 0
+    for (u,v) in F.edges():
+        if 'weight' not in F[u][v]:
+            F[u][v]['weight'] = 1
+        weight = F[u][v]['weight']
+        w[u] += weight
+        w[v] += weight
+        wtot += weight
+        if u != v:
+            wtot += weight
+    q = {u:1./n for u in F.nodes()}
+    wtot = wtot / 2
+    # aggregate graph
+    H = F.copy()
+    J = 0
+    for t in range(n - 1):
+        u = int(D[t][0])
+        v = int(D[t][1])
+        #try:
+        p = 1. * H[u][v]['weight'] / wtot
+        J += p * (q[u] + q[v])
+        #except:
+        #    pass
+        H.add_node(n + t)
+        neighbors_u = list(H.neighbors(u))
+        neighbors_v = list(H.neighbors(v))
+        for x in neighbors_u:
+            H.add_edge(n + t,x,weight = H[u][x]['weight'])
+        neighbors = list(H.neighbors(v))
+        for x in neighbors_v:
+            if H.has_edge(n + t,x):
+                H[n + t][x]['weight'] += H[v][x]['weight']
+            else:
+                H.add_edge(n + t,x,weight = H[v][x]['weight'])
+        H.remove_node(u)
+        H.remove_node(v)
+        q[n + t] = q.pop(u) + q.pop(v)
+    return J
+
 ###########################################     
 ### Hierarchical Stochastic Block Model ###
 ########################################### 
@@ -168,3 +223,5 @@ def resolution_analysis(G, resolutions):
             plt.axvline(x = r, color='k', alpha=.2)
     plt.xscale('log')
     plt.show()
+
+    
